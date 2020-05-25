@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <!--<link href="/static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>-->
+    <!--<script src="/static/js/bootstrap.js" type="application/javascript"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper-utils.js"></script>-->
+
+    <link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap.min.css">
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+    <script src="/assets/vendor/popper.min.js"></script>
+    <script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/home">Emt Lab</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/books">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/books/add-new">Add new book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/payments/charge">Cart <span class="sr-only"></span></a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                           placeholder="Search...">
+                </div>
+                <a class="btn btn-success btn-sm ml-3" href="payments/charge">
+                    <i class="fa fa-shopping-cart"></i>Cart
+                </a>
+            </form>
+        </div>
+    </div>
+</nav>
+<section class="jumbotron text-center">
+    <div class="container">
+        <h1 class="jumbotron-heading">Emt Lab</h1>
+    </div>
+</section>
+
+<div th:if="${param.message}">
+    <h2 class="text-center text-primary" th:text="${param.message}"></h2>
+</div>
+
+<div th:if="${param.error}">
+    <h2 class="text-center text-danger" th:text="${param.error}"></h2>
+</div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10">
+            <form action="/payments/charge"
+                  method="post">
+
+                <div class="row">
+                    <div class="col-12" th:if="${shoppingCart.getBooks().size() > 0}">
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">Book</th>
+                                    <th scope="col">Number of Books</th>
+                                    <th scope="col">Category</th>
+                                    <th></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr th:each="book : ${shoppingCart.getBooks()}">
+                                    <td><img th:src="${book.getImageBase64()}" style="width: 50px; height: 50px;"/></td>
+                                    <td th:text="${book.getName()}"></td>
+                                    <td th:text="${book.getNumberOfBooks()}"></td>
+                                    <td th:text="${book.getCategory() != null} ? ${book.getCategory().getName()} : 'No Category'"></td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <h3 class="text-primary" th:text="${amount/100} + ' ' + ${currency}"></h3>
+                        <br/>
+                        <br/>
+                    </div>
+                    <br/>
+                </div>
+
+                <input type="hidden" th:value="${amount}" name="amount"/>
+                <input type="hidden" th:value="${currency}" name="currency"/>
+
+                <script
+                        src='https://checkout.stripe.com/checkout.js'
+                        class='stripe-button'
+                        th:attr='data-key=${stripePublicKey},
+                        data-amount=${amount},
+                        data-currency=${currency}'
+                        data-name='Emt lab'
+                        data-description='Emt checkout'
+                        data-locale='auto'
+                        data-zip-code='false'>
+                </script>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+

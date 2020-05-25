@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+    <!--<link href="/static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>-->
+    <!--<script src="/static/js/bootstrap.js" type="application/javascript"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
+    <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/esm/popper-utils.js"></script>-->
+
+    <link rel="stylesheet" href="/assets/vendor/bootstrap/bootstrap.min.css">
+    <script src="/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="/assets/vendor/jquery-migrate/jquery-migrate.min.js"></script>
+    <script src="/assets/vendor/popper.min.js"></script>
+    <script src="/assets/vendor/bootstrap/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="container">
+        <a class="navbar-brand" href="/home">Emt Lab</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse justify-content-end" id="navbarsExampleDefault">
+            <ul class="navbar-nav m-auto">
+                <li class="nav-item m-auto">
+                    <a class="nav-link" href="/home">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/books">Books</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/books/add-new">Add new book</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/payments/charge">Cart<span class="sr-only"></span></a>
+                </li>
+            </ul>
+
+            <form class="form-inline my-2 my-lg-0">
+                <div class="input-group input-group-sm">
+                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
+                           placeholder="Search...">
+                </div>
+                <a class="btn btn-success btn-sm ml-3" href="payments/charge">
+                    <i class="fa fa-shopping-cart"></i>Cart
+                </a>
+            </form>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-5">
+            <form action="/books"
+                  method="post"
+                  enctype="multipart/form-data"
+                  th:object="${book}">
+                <input type="text" hidden="hidden" name="id" th:value="${book.getId()}">
+                <div class="form-group">
+                    <label for="name">Book name</label>
+                    <input type="text"
+                           class="form-control"
+                           th:value="${book.getName()}"
+                           id="name"
+                           name="name"
+                           th:field="*{name}"
+                           required
+                           placeholder="Enter book name">
+                </div>
+                <div class="form-group">
+                    <h4 class="text-danger"
+                        th:if="${#fields.hasErrors('numberOfBooks')}"
+                        th:errors="*{numberOfBooks}">
+                    </h4>
+                    <label for="numberOfBooks">Number of books</label>
+                    <input type="text"
+                           class="form-control"
+                           th:value="${book.getNumberOfBooks()}"
+                           id="numberOfBooks"
+                           th:field="*{numberOfBooks}"
+                           name="numberOfBooks"
+                           placeholder="Enter number of books">
+                </div>
+
+                <div class="form-group">
+                    <label>Category</label>
+                    <select th:field="*{category.id}" class="form-control">
+                        <option
+                                th:selected="${book.getCategory() != null && book.getCategory().getId() == cat.getId()}"
+                                th:each="cat: ${categories}"
+                                th:value="${cat.getId()}"
+                                th:text="${cat.getName()}">
+                        </option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Image</label>
+                    <input name="image" id="image" class="form-control" type="file"/>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a type="button" class="btn btn-primary" href="/books">Back</a>
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+
+
