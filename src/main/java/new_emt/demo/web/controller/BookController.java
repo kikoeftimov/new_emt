@@ -1,8 +1,11 @@
 package new_emt.demo.web.controller;
 
+import new_emt.demo.model.Author;
 import new_emt.demo.model.Book;
 import new_emt.demo.model.Category;
 import new_emt.demo.model.exceptions.BookIsAlreadyInShoppingCartException;
+import new_emt.demo.repository.AuthorRepository;
+import new_emt.demo.service.AuthorService;
 import new_emt.demo.service.BookService;
 import new_emt.demo.service.CategoryService;
 import org.springframework.stereotype.Controller;
@@ -21,10 +24,14 @@ public class BookController {
 
     private final BookService bookService;
     private final CategoryService categoryService;
+    private final AuthorService authorService;
+    private final AuthorRepository authorRepository;
 
-    public BookController(BookService bookService, CategoryService categoryService) {
+    public BookController(BookService bookService, CategoryService categoryService, AuthorService authorService, AuthorRepository authorRepository) {
         this.bookService = bookService;
         this.categoryService = categoryService;
+        this.authorService = authorService;
+        this.authorRepository = authorRepository;
     }
 
     @GetMapping
@@ -37,7 +44,9 @@ public class BookController {
     @GetMapping("add-new")
     public String createNewBook(Model model){
         List<Category> categories = this.categoryService.findAll();
+        List<Author> authors = this.authorService.findAll();
         model.addAttribute("categories", categories);
+        model.addAttribute("authors", this.authorRepository.findAll());
         model.addAttribute("book", new Book());
         return "add-book";
     }
@@ -47,8 +56,10 @@ public class BookController {
         try {
             Book book = this.bookService.findById(id);
             List<Category> categories = this.categoryService.findAll();
+            List<Author> authors = this.authorService.findAll();
             model.addAttribute("book", book);
             model.addAttribute("categories", categories);
+            model.addAttribute("authors", this.authorRepository.findAll());
             return "add-book";
 
         }catch (RuntimeException ex){
@@ -65,6 +76,7 @@ public class BookController {
         if(bindingResult.hasErrors()){
             List<Category> categories = this.categoryService.findAll();
             model.addAttribute("categories", categories);
+            model.addAttribute("authors", this.authorRepository.findAll());
             return "add-book";
         }
         try {

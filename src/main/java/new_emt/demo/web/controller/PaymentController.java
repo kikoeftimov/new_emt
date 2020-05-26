@@ -30,7 +30,7 @@ public class PaymentController {
 
     @GetMapping("/charge")
     public String getCheckoutPage(Model model){
-        ShoppingCart shoppingCart = this.shoppingCartService.findActiveShoppingCartByUsername(this.authService.getCurrentUsername());
+        ShoppingCart shoppingCart = this.shoppingCartService.getActiveShoppingCart(this.authService.getCurrentUsername());
         try{
             model.addAttribute("shoppingCart", shoppingCart);
             model.addAttribute("currency", "eur");

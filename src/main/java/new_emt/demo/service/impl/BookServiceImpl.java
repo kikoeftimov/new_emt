@@ -1,10 +1,12 @@
 package new_emt.demo.service.impl;
 
+import new_emt.demo.model.Author;
 import new_emt.demo.model.Book;
 import new_emt.demo.model.Category;
 import new_emt.demo.model.exceptions.BookIsAlreadyInShoppingCartException;
 import new_emt.demo.model.exceptions.BookNotFoundException;
 import new_emt.demo.repository.BookRepository;
+import new_emt.demo.service.AuthorService;
 import new_emt.demo.service.BookService;
 import new_emt.demo.service.CategoryService;
 import org.springframework.stereotype.Service;
@@ -20,10 +22,12 @@ public class BookServiceImpl implements BookService {
 
     private final BookRepository bookRepository;
     private final CategoryService categoryService;
+    private final AuthorService authorService;
 
-    public BookServiceImpl(BookRepository bookRepository, CategoryService categoryService) {
+    public BookServiceImpl(BookRepository bookRepository, CategoryService categoryService, AuthorService authorService) {
         this.bookRepository = bookRepository;
         this.categoryService = categoryService;
+        this.authorService = authorService;
     }
 
     @Override
