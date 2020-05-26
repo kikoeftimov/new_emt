@@ -37,7 +37,7 @@ public class PaymentController {
             model.addAttribute("amount", shoppingCart.getBooks().size() * 100 * 200);
             model.addAttribute("stripePublicKey", this.publicKey);
             return "checkout";
-        }catch (RuntimeException ex){
+        }catch (RuntimeException ex) {
             return "redirect:/books?error=" + ex.getLocalizedMessage();
         }
     }

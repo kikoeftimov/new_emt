@@ -31,25 +31,15 @@
                     <a class="nav-link" href="/home">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/books">Books</a>
+                    <a class="nav-link" href="/books">Books</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item" sec:authorize="hasRole('ROLE_ADMIN')">
                     <a class="nav-link" href="/books/add-new">Add new book</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/payments/charge">Cart <span class="sr-only"></span></a>
+                    <a class="nav-link active" href="/payments/charge">Cart <span class="sr-only"></span></a>
                 </li>
             </ul>
-
-            <form class="form-inline my-2 my-lg-0">
-                <div class="input-group input-group-sm">
-                    <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm"
-                           placeholder="Search...">
-                </div>
-                <a class="btn btn-success btn-sm ml-3" href="payments/charge">
-                    <i class="fa fa-shopping-cart"></i>Cart
-                </a>
-            </form>
         </div>
     </div>
 </nav>
@@ -66,7 +56,6 @@
 <div th:if="${param.error}">
     <h2 class="text-center text-danger" th:text="${param.error}"></h2>
 </div>
-
 
 <div class="container">
     <div class="row">

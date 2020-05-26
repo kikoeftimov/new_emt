@@ -4,6 +4,8 @@ import new_emt.demo.model.User;
 import new_emt.demo.model.exceptions.UserNotFoundException;
 import new_emt.demo.repository.UserRepository;
 import new_emt.demo.service.UserService;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -29,5 +31,11 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(String username) {
         this.userRepository.deleteById(username);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        return this.userRepository.findById(s)
+                .orElseThrow(() -> new UsernameNotFoundException(s));
     }
 }
