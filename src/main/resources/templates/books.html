@@ -83,7 +83,7 @@
                     </thead>
                     <tbody>
                     <tr th:each="book : ${books}">
-                        <td><img th:src="${book.getImageBase64()}" style="width: 50px; height: 50px;"/></td>
+                        <td><img th:src="${book.getImageBase64()}" style="width: 100px; height: 100px;"/></td>
                         <td th:text="${book.getName()}"></td>
                         <td th:text="${book.getNumberOfBooks()}"></td>
                         <td th:text="${book.getCategory() != null} ? ${book.getCategory().getName()} : 'No Category'"></td>
@@ -93,10 +93,10 @@
                             </form>
                             <a th:href="@{/books/{id}/edit(id=${book.getId()})}" class="btn btn-sm btn-info"><i class="fa fa-edit">Edit</i></a>
                             <form th:action="@{/shopping-carts/{id}/add-book(id=${book.getId()})}" th:method="post">
-                                <button type="submit" class="btn btn-sm btn-primary"><i class="fa fa-shopping-cart">Add book to cart</i></button>
+                                <button type="submit" class="btn btn-sm btn-success"><i class="fa fa-shopping-cart">Add to cart</i></button>
                             </form>
                             <form th:action="@{/shopping-carts/{id}/remove-book(id=${book.getId()})}" th:method="delete">
-                                <button type="submit" class="btn btn-sm btn-warning"><i class="fa fa-trash">Remove book from cart</i></button>
+                                <button type="submit" class="btn btn-sm" style="background-color: lightcoral"><i class="fa fa-trash">Remove from cart</i></button>
                             </form>
                         </td>
                     </tr>

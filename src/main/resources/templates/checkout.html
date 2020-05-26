@@ -70,7 +70,8 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-10">
+        <div class="col-sm-2 col-md-2"></div>
+        <div class="col-sm-8 col-md-8">
             <form action="/payments/charge"
                   method="post">
 
@@ -82,46 +83,54 @@
                                 <tr>
                                     <th scope="col"></th>
                                     <th scope="col">Book</th>
-                                    <th scope="col">Number of Books</th>
+                                    <th scope="col">Quantity</th>
                                     <th scope="col">Category</th>
-                                    <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr th:each="book : ${shoppingCart.getBooks()}">
-                                    <td><img th:src="${book.getImageBase64()}" style="width: 50px; height: 50px;"/></td>
+                                    <td><img th:src="${book.getImageBase64()}" style="width: 70px; height: 70px;"/></td>
                                     <td th:text="${book.getName()}"></td>
-                                    <td th:text="${book.getNumberOfBooks()}"></td>
+                                    <td th:text="1"></td>
                                     <td th:text="${book.getCategory() != null} ? ${book.getCategory().getName()} : 'No Category'"></td>
                                 </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-                    <div class="row">
-                        <h3 class="text-primary" th:text="${amount/100} + ' ' + ${currency}"></h3>
-                        <br/>
-                        <br/>
-                    </div>
                     <br/>
+                </div>
+
+
+
+                <div class="row float-right" style="margin-right: 20px;">
+                    <h3 class="text-primary" th:text="'Total: ' + ${amount/100} + ' ' + ${currency}"></h3>
                 </div>
 
                 <input type="hidden" th:value="${amount}" name="amount"/>
                 <input type="hidden" th:value="${currency}" name="currency"/>
 
-                <script
-                        src='https://checkout.stripe.com/checkout.js'
-                        class='stripe-button'
-                        th:attr='data-key=${stripePublicKey},
-                        data-amount=${amount},
-                        data-currency=${currency}'
-                        data-name='Emt lab'
-                        data-description='Emt checkout'
-                        data-locale='auto'
-                        data-zip-code='false'>
-                </script>
+                <br/>
+                <br/>
+                <div class="row float-left">
+                    <a type="button" class="btn btn-outline-primary" href="/books" style="margin-left: 20px;">
+                        <i class="fa fa-shopping-basket"></i>  Continue shopping
+                    </a>
+                </div>
 
+                <div class="row float-right" style="margin-right: 20px;">
+                    <script
+                            src='https://checkout.stripe.com/checkout.js'
+                            class='stripe-button'
+                            th:attr='data-key=${stripePublicKey},
+                            data-amount=${amount},
+                            data-currency=${currency}'
+                            data-name='Emt lab'
+                            data-description='Emt checkout'
+                            data-locale='auto'
+                            data-zip-code='false'>
+                    </script>
+                </div>
             </form>
         </div>
     </div>

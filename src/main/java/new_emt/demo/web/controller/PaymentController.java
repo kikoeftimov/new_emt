@@ -3,6 +3,7 @@ package new_emt.demo.web.controller;
 import com.stripe.exception.StripeException;
 import new_emt.demo.model.ShoppingCart;
 import new_emt.demo.model.dto.ChargeRequest;
+import new_emt.demo.model.exceptions.ShoppingCartIsNotActive;
 import new_emt.demo.service.AuthService;
 import new_emt.demo.service.ShoppingCartService;
 import org.springframework.beans.factory.annotation.Value;
