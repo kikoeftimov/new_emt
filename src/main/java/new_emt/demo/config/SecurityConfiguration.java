@@ -37,7 +37,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/assets/**").permitAll()
+                .antMatchers("/", "/home", "/assets/**").permitAll()
                 .antMatchers("/books/add-new").hasRole("ADMIN")
                 .antMatchers("/books/*/edit").hasRole("ADMIN")
                 .anyRequest()
@@ -53,7 +53,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                     .clearAuthentication(true)
                     .invalidateHttpSession(true)
                     .deleteCookies("JSESSIONID")
-                    .logoutSuccessUrl("/login")
+                    .logoutSuccessUrl("/home")
                 .and()
                 .exceptionHandling().accessDeniedPage("/books?error=You are not authorized!");
     }

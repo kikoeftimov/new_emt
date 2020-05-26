@@ -46,7 +46,7 @@ public class BookController {
         List<Category> categories = this.categoryService.findAll();
         List<Author> authors = this.authorService.findAll();
         model.addAttribute("categories", categories);
-        model.addAttribute("authors", this.authorRepository.findAll());
+        model.addAttribute("authors", authors);
         model.addAttribute("book", new Book());
         return "add-book";
     }
@@ -59,7 +59,7 @@ public class BookController {
             List<Author> authors = this.authorService.findAll();
             model.addAttribute("book", book);
             model.addAttribute("categories", categories);
-            model.addAttribute("authors", this.authorRepository.findAll());
+            model.addAttribute("authors", authors);
             return "add-book";
 
         }catch (RuntimeException ex){
@@ -75,8 +75,9 @@ public class BookController {
     {
         if(bindingResult.hasErrors()){
             List<Category> categories = this.categoryService.findAll();
+            List<Author> authors = this.authorService.findAll();
             model.addAttribute("categories", categories);
-            model.addAttribute("authors", this.authorRepository.findAll());
+            model.addAttribute("authors", authors);
             return "add-book";
         }
         try {
