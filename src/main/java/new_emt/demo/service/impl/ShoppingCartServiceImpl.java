@@ -1,17 +1,16 @@
 package new_emt.demo.service.impl;
 
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import new_emt.demo.model.Book;
 import new_emt.demo.model.ShoppingCart;
+import new_emt.demo.model.Transaction;
 import new_emt.demo.model.User;
 import new_emt.demo.model.dto.ChargeRequest;
 import new_emt.demo.model.enumerations.CartStatus;
 import new_emt.demo.model.exceptions.*;
 import new_emt.demo.repository.ShoppingCartRepository;
+import new_emt.demo.repository.TransactionsRepository;
 import new_emt.demo.service.*;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,13 +27,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
     private final BookService bookService;
     private final UserService userService;
     private final PaymentService paymentService;
+    private final TransactionsRepository transactionsRepository;
 
-    public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository, AuthService authService, BookService bookService, UserService userService, PaymentService paymentService) {
+    public ShoppingCartServiceImpl(ShoppingCartRepository shoppingCartRepository, AuthService authService, BookService bookService, UserService userService, PaymentService paymentService, TransactionsRepository transactionsRepository) {
         this.shoppingCartRepository = shoppingCartRepository;
         this.authService = authService;
         this.bookService = bookService;
         this.userService = userService;
         this.paymentService = paymentService;
+        this.transactionsRepository = transactionsRepository;
     }
 
     @Override
@@ -110,6 +111,8 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         ShoppingCart shoppingCart = this.shoppingCartRepository.findByUserUsernameAndStatus(username, CartStatus.CREATED)
                 .orElseThrow(() -> new ShoppingCartIsNotActive(username));
 
+        User user = this.userService.findById(username);
+
         List<Book> books = shoppingCart.getBooks();
         float price=0;
 
@@ -127,6 +130,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         }catch (StripeException e) {
             throw new TransactionFailedException(username, e.getMessage());
         }
+        Transaction transaction = new Transaction();
+        transaction.setShoppingCart(shoppingCart);
+        transaction.setAmount(chargeRequest.getAmount()/100);
+        transaction.setUser(user);
+        this.transactionsRepository.save(transaction);
 
         shoppingCart.setBooks(books);
         shoppingCart.setFinished(LocalDateTime.now());
