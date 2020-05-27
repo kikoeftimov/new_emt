@@ -7,4 +7,6 @@ public interface AuthService {
     User findUser();
 
     String getCurrentUsername();
+
+    User signUpUser(String username, String password, String repeatedPassword);
 }

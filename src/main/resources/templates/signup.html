@@ -2,7 +2,7 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Login</title>
+    <title>Sign up</title>
     <!--<link href="/static/css/bootstrap.min.css" rel="stylesheet" th:href="@{/css/bootstrap.css}"/>-->
     <!--<script src="/static/js/bootstrap.js" type="application/javascript"></script>-->
     <!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>-->
@@ -28,10 +28,8 @@
         <div class="col-sm-4 col-md-4">
 
             <h1 th:if="${param.error}" th:text="${param.error}" style="color: red;"></h1>
-            <h1 th:if="${param.message}" th:text="${param.message}" style="color: blue;"></h1>
-
             <br>
-            <form class="form-signin" method="post" action="/login">
+            <form class="form-signin" method="post" action="/signup">
                 <h2 class="form-signin-heading">Please sign in</h2>
                 <p>
                     <label for="username" class="sr-only">Username</label>
@@ -41,8 +39,12 @@
                     <label for="password" class="sr-only">Password</label>
                     <input type="password" id="password" name="password" class="form-control" placeholder="Password" required="">
                 </p>
-                <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-                <a class="btn btn-lg btn-success btn-block" href="/signup">Register here</a>
+                <p>
+                    <label for="repeatedPassword" class="sr-only">Repeat password</label>
+                    <input type="password" id="repeatedPassword" name="repeatedPassword" class="form-control" placeholder="Repeat Password" required="">
+                </p>
+                <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
+                <a class="btn btn-lg btn-success btn-block" href="/login">Already have an account? Login</a>
             </form>
         </div>
 

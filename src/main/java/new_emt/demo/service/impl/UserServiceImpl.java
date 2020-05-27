@@ -1,6 +1,7 @@
 package new_emt.demo.service.impl;
 
 import new_emt.demo.model.User;
+import new_emt.demo.model.exceptions.UserAlreadyExistsException;
 import new_emt.demo.model.exceptions.UserNotFoundException;
 import new_emt.demo.repository.UserRepository;
 import new_emt.demo.service.UserService;
@@ -31,6 +32,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteById(String username) {
         this.userRepository.deleteById(username);
+    }
+
+    @Override
+    public User registerUser(User user) {
+        if(this.userRepository.existsById(user.getUsername())){
+            throw new UserAlreadyExistsException(user.getUsername());
+        }
+        return this.userRepository.save(user);
     }
 
     @Override
