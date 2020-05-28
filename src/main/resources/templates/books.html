@@ -87,7 +87,7 @@
                     <tr>
                         <th scope="col"></th>
                         <th scope="col">Book</th>
-                        <th scope="col" colspan="0">Authors</th>
+                        <th scope="col">Authors</th>
                         <th scope="col">Number of Books</th>
                         <th scope="col">Category</th>
                         <th></th>
@@ -97,8 +97,9 @@
                     <tr th:each="book : ${books}">
                         <td><img th:src="${book.getImageBase64()}" style="width: 100px; height: 100px;"/></td>
                         <td th:text="${book.getName()}"></td>
-                        <td th:each="author : ${book.getAuthors()}" th:text="${author.getName()} +
-                                 ' ' + ${author.getLastname()}" colspan="0"></td>
+                        <td>
+                            <p  th:each="author : ${book.getAuthors()}" th:text="${author.getName()} + ' ' + ${author.getLastname()}"></p>
+                        </td>
                         <td th:text="${book.getNumberOfBooks()}"></td>
                         <td th:text="${book.getCategory() != null} ? ${book.getCategory().getName()} : 'No Category'"></td>
                         <td class="text-right">

@@ -22,7 +22,7 @@ public class Book {
     private String name;
 
     @NotNull
-    @Min(value = 1, message = "Please insert number of books bigger than 0")
+    @Min(value = 0, message = "Please insert number of books bigger than 0")
     private Integer numberOfBooks;
 
     @NotNull(message = "Please choose a category")

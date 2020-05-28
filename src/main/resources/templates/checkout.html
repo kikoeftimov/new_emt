@@ -92,8 +92,9 @@
                                 <tr th:each="book : ${shoppingCart.getBooks()}">
                                     <td><img th:src="${book.getImageBase64()}" style="width: 70px; height: 70px;"/></td>
                                     <td th:text="${book.getName()}"></td>
-                                    <td th:each="author : ${book.getAuthors()}" th:text="${author.getName()} +
-                                                ' ' + ${author.getLastname()}"></td>
+                                    <td>
+                                        <p  th:each="author : ${book.getAuthors()}" th:text="${author.getName()} + ' ' + ${author.getLastname()}"></p>
+                                    </td>
                                     <td th:text="1"></td>
                                     <td th:text="${book.getCategory() != null} ? ${book.getCategory().getName()} : 'No Category'"></td>
                                 </tr>
