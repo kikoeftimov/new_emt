@@ -18,4 +18,6 @@ public interface ShoppingCartService{
     ShoppingCart cancelCart(String username);
 
     ShoppingCart checkoutCart(String username, ChargeRequest chargeRequest);
+
+    ShoppingCart clearCart(String username);
 }

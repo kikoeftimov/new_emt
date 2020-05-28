@@ -52,4 +52,10 @@ public class PaymentController {
             return "redirect:/payments/charge?error=" + ex.getLocalizedMessage();
         }
     }
+
+    @PostMapping("/clear")
+    public String clearCart(Model model){
+        ShoppingCart shoppingCart = this.shoppingCartService.clearCart(this.authService.getCurrentUsername());
+        return "redirect:/payments/charge?message=";
+    }
 }

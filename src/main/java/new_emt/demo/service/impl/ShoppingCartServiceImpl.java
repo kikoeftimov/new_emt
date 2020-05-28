@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -144,6 +145,15 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         shoppingCart.setBooks(books);
         shoppingCart.setFinished(LocalDateTime.now());
         shoppingCart.setStatus(CartStatus.FINISHED);
+        return this.shoppingCartRepository.save(shoppingCart);
+    }
+
+    @Override
+    public ShoppingCart clearCart(String username) {
+        ShoppingCart shoppingCart = this.shoppingCartRepository.findByUserUsernameAndStatus(username, CartStatus.CREATED)
+                .orElseThrow(() -> new ShoppingCartIsNotActive(username));
+
+        shoppingCart.setBooks(new ArrayList<>());
         return this.shoppingCartRepository.save(shoppingCart);
     }
 }
