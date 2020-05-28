@@ -41,4 +41,6 @@ public class ChargeRequest {
     public void setStripeToken(String stripeToken) {
         this.stripeToken = stripeToken;
     }
+
+
 }

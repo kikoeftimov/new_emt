@@ -134,6 +134,11 @@ public class ShoppingCartServiceImpl implements ShoppingCartService {
         transaction.setShoppingCart(shoppingCart);
         transaction.setAmount(chargeRequest.getAmount()/100);
         transaction.setUser(user);
+        transaction.setStatus(charge.getStatus());
+        transaction.setLocalDateTime(LocalDateTime.now());
+        transaction.setPaymentMethod(charge.getPaymentMethod());
+        transaction.setRefunded(charge.getRefunded());
+        transaction.setEmail(charge.getBillingDetails().getName());
         this.transactionsRepository.save(transaction);
 
         shoppingCart.setBooks(books);

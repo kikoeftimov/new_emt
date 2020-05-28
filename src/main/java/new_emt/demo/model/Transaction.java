@@ -1,6 +1,8 @@
 package new_emt.demo.model;
 
 import javax.persistence.*;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "transactions")
@@ -17,6 +19,16 @@ public class Transaction {
     private User user;
 
     private Integer amount;
+
+    private String status;
+
+    private Boolean refunded;
+
+    private String paymentMethod;
+
+    private LocalDateTime localDateTime;
+
+    private String email;
 
     public Transaction() {
     }
@@ -52,4 +64,45 @@ public class Transaction {
     public void setUser(User user) {
         this.user = user;
     }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Boolean getRefunded() {
+        return refunded;
+    }
+
+    public void setRefunded(Boolean refunded) {
+        this.refunded = refunded;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
+    }
+
+    public LocalDateTime getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(LocalDateTime localDateTime) {
+        this.localDateTime = localDateTime;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
 }
