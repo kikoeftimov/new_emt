@@ -41,7 +41,7 @@ public class BookController {
         return "books";
     }
 
-    @GetMapping("add-new")
+    @GetMapping("/add-new")
     public String createNewBook(Model model){
         List<Category> categories = this.categoryService.findAll();
         List<Author> authors = this.authorService.findAll();

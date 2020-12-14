@@ -3,7 +3,6 @@ package new_emt.demo.model;
 import new_emt.demo.model.enumerations.CartStatus;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
