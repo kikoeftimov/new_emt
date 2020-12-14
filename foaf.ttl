@@ -2,26 +2,26 @@
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
-<https://github.com/kikoeftimov/new_emt/blob/master/foaf.ttl> a foaf:PersonalProfileDocument ;
-                                                              admin:errorReportsTo <mailto:leigh@ldodds.com> ;
-                                                              admin:generatorAgent <http://www.ldodds.com/foaf/foaf-a-matic> ;
-                                                              foaf:maker <https://github.com/kikoeftimov/new_emt/blob/master/foaf.ttl#me> ;
-                                                              foaf:primaryTopic <https://github.com/kikoeftimov/new_emt/blob/master/foaf.ttl#me> .
+<https://raw.githubusercontent.com/kikoeftimov/new_emt/master/foaf.ttl> a foaf:PersonalProfileDocument ;
+                                                                        admin:errorReportsTo <mailto:leigh@ldodds.com> ;
+                                                                        admin:generatorAgent <http://www.ldodds.com/foaf/foaf-a-matic> ;
+                                                                        foaf:maker <https://raw.githubusercontent.com/kikoeftimov/new_emt/master/foaf.ttl#me> ;
+                                                                        foaf:primaryTopic <https://raw.githubusercontent.com/kikoeftimov/new_emt/master/foaf.ttl#me> .
 
-<https://github.com/kikoeftimov/new_emt/blob/master/foaf.ttl#me> a foaf:Person ;
-                                                                 foaf:family_name "Eftimov" ;
-                                                                 foaf:givenname "Kristijan" ;
-                                                                 foaf:homepage <https://github.com/kikoeftimov/new_emt/blob/master/foaf.ttl> ;
-                                                                 foaf:knows [ a foaf:Person ;
-                                                                              rdfs:seeAlso <https://www.dropbox.com/s/gzoz5il9eucg1mj/foaf.ttl?dl=1> ;
-                                                                              foaf:mbox_sha1sum "7ec3e7d4e154b5fecdf9c14b805134813a47ca92" ;
-                                                                              foaf:name "Marjan" ],
+<https://raw.githubusercontent.com/kikoeftimov/new_emt/master/foaf.ttl#me> a foaf:Person ;
+                                                                           foaf:family_name "Eftimov" ;
+                                                                           foaf:givenname "Kristijan" ;
+                                                                           foaf:homepage <https://github.com/kikoeftimov/new_emt/blob/master/foaf.ttl> ;
+                                                                           foaf:knows [ a foaf:Person ;
+                                                                                        rdfs:seeAlso <https://www.dropbox.com/s/gzoz5il9eucg1mj/foaf.ttl?dl=1> ;
+                                                                                        foaf:mbox_sha1sum "7ec3e7d4e154b5fecdf9c14b805134813a47ca92" ;
+                                                                                        foaf:name "Marjan" ],
 [ a foaf:Person ;
   rdfs:seeAlso <https://www.dropbox.com/s/4yxw23gvxyjdo5e/foaf1.ttl?dl=1#me> ;
   foaf:mbox_sha1sum "8cf5e15f69f29c716c19f8adef9d9573a7fe2d59" ;
   foaf:name "Petar" ] ;
-                                                                 foaf:mbox_sha1sum "b9c5a1fc77c1579923b298aed8857c67da8e7446" ;
-                                                                 foaf:name "Kristijan Eftimov" ;
-                                                                 foaf:nick "kristijaneftimov" ;
-                                                                 foaf:phone <https://github.com/kikoeftimov/new_emt/blob/master/tel:000555999> ;
-                                                                 foaf:title "Mr" .
+                                                                           foaf:mbox_sha1sum "b9c5a1fc77c1579923b298aed8857c67da8e7446" ;
+                                                                           foaf:name "Kristijan Eftimov" ;
+                                                                           foaf:nick "kristijaneftimov" ;
+                                                                           foaf:phone <https://raw.githubusercontent.com/kikoeftimov/new_emt/master/tel:000555999> ;
+                                                                           foaf:title "Mr" .
